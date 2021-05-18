@@ -5,21 +5,21 @@ const AlbumThumbnail = props => {
     const imagePath = album.photos.length > 0 ? album.photos[0].thumbnailUrl : ''; 
     return(
 
-        <div className="container mx-auto px-4"> 
-                
-        <section className="py-8 px-4">
-          <div className="flex flex-wrap -mx-4">
-            <div className="hidden md:block md:w-1/4 px-4">
         
-            {imagePath && <img className="h-full w-full bg-cover rounded shadow-md " onClick={() => onTitleClicked(album.id) } src={imagePath} alt="" /> }
-            <p onClick={() => onTitleClicked(album.id) }>{album.title}</p>
-            <p>{album.photos.length} Photos</p>
+                
+        <section className="md:w-1/3 py-8 px-4">
+         
+            <div className="hidden md:block md:w-1/1 px-4 object-left">
+        
+            {imagePath && <img className="rounded shadow-md " onClick={() => onTitleClicked(album.id) } src={imagePath} alt="" /> }
+            <h1 className="text-base md:text-lg font-semibold md:text-gray-500 capitalize" onClick={() => onTitleClicked(album.id) }>{album.title}</h1>
+            <p className="text-base md:text-md font-normal md:text-gray-500 capitalize">{album.photos.length} Photos</p>
        
         </div>
-        </div>
+       
         
         </section>
-        </div>
+       
     )
 }
 
