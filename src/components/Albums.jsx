@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Api from './Api'
 import AlbumThumbnail from './AlbumThumbnail'
+import AlbumGallery from './AlbumGallery';
 
 const Albums = props => {
     const AlbumsPath = 'albums';
@@ -8,6 +9,7 @@ const Albums = props => {
     const [albums, setAlbums] = useState([]);
     const [photos, setPhotos] = useState([]);
     const [mappedAlbums, setMappedAlbums] = useState([]);
+    const [selectedAlbum, setSelectedAlbum] = useState(null);
 
     useEffect(()=> {
         Api.get('albums', (data) => {
@@ -27,10 +29,16 @@ const Albums = props => {
         setMappedAlbums(tempAlbums);
     }, [photos, albums]);
 
+    const onTitleClicked = (albumId) => {
+        let album = mappedAlbums.find(album => album.id === albumId);
+        setSelectedAlbum(album);
+    }
+
     return(
         <>                       
             <div className="flex flex-wrap -mx-4">
-                {mappedAlbums.map(album => <AlbumThumbnail album={album} />)}            
+                {!selectedAlbum && mappedAlbums.map(album => <AlbumThumbnail key={album.id} album={album} onTitleClicked={onTitleClicked} />)}
+                { selectedAlbum && <AlbumGallery photos={selectedAlbum.photos} onBackClicked={() => setSelectedAlbum(null) } />} 
             </div>                 
         </>
     )
