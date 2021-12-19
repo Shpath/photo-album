@@ -36,7 +36,7 @@ const Albums = props => {
 
     return(
         <>                       
-            <div className="flex flex-wrap -mx-4">
+            <div className="flex-wrap -mx-4">
                 {!selectedAlbum && mappedAlbums.map(album => <AlbumThumbnail key={album.id} album={album} onTitleClicked={onTitleClicked} />)}
                 { selectedAlbum && <AlbumGallery photos={selectedAlbum.photos} onBackClicked={() => setSelectedAlbum(null) } />} 
             </div>                 
